@@ -13,26 +13,20 @@ import { Button, Card, ButtonGroup } from "react-bootstrap";
 interface TextEditorProps {
   content: string;
   onChange: (content: string) => void;
+  onFocus?: () => void;
+  onInputActivity?: () => void;
 }
 
-const TextEditor = ({ content, onChange }: TextEditorProps) => {
+const TextEditor = ({ content, onChange, onFocus, onInputActivity }: TextEditorProps) => {
   const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Bold,
-      Italic,
-      Underline,
-      BulletList,
-      OrderedList,
-      Blockquote,
-      CodeBlock,
-      Heading.configure({ levels: [1, 2, 3] }),
-    ],
+    extensions: [StarterKit, Bold, Italic, Underline, BulletList, OrderedList, Blockquote, CodeBlock, Heading.configure({ levels: [1, 2, 3] })],
     content,
     onUpdate: ({ editor }) => {
       const newContent = editor.getHTML();
       onChange(newContent);
-    },
+
+      if (onInputActivity) onInputActivity();
+    }
   });
 
   if (!editor) {
@@ -42,60 +36,25 @@ const TextEditor = ({ content, onChange }: TextEditorProps) => {
   return (
     <Card className="p-3">
       <ButtonGroup className="mb-2">
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          active={editor.isActive("bold")}
-        >
+        <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleBold().run()} active={editor.isActive("bold")}>
           <strong>B</strong>
         </Button>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          active={editor.isActive("italic")}
-        >
+        <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleItalic().run()} active={editor.isActive("italic")}>
           <em>I</em>
         </Button>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleUnderline().run()}
-          active={editor.isActive("underline")}
-        >
+        <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleUnderline().run()} active={editor.isActive("underline")}>
           <u>U</u>
         </Button>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          active={editor.isActive("bulletList")}
-        >
+        <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleBulletList().run()} active={editor.isActive("bulletList")}>
           • Lista
         </Button>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          active={editor.isActive("orderedList")}
-        >
+        <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleOrderedList().run()} active={editor.isActive("orderedList")}>
           1. Lista
         </Button>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          active={editor.isActive("blockquote")}
-        >
+        <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleBlockquote().run()} active={editor.isActive("blockquote")}>
           “ Citazione
         </Button>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-          active={editor.isActive("codeBlock")}
-        >
+        <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleCodeBlock().run()} active={editor.isActive("codeBlock")}>
           ` Codice
         </Button>
         <Button
@@ -125,15 +84,10 @@ const TextEditor = ({ content, onChange }: TextEditorProps) => {
       </ButtonGroup>
 
       {/* Contenuto dell'editor */}
-      <EditorContent editor={editor} />
+      <EditorContent editor={editor} onFocus={onFocus} />
 
       {/* Pulsante per pulire il contenuto */}
-      <Button
-        variant="outline-secondary"
-        size="sm"
-        className="mt-2"
-        onClick={() => editor.commands.clearContent()}
-      >
+      <Button variant="outline-secondary" size="sm" className="mt-2" onClick={() => editor.commands.clearContent()}>
         Pulisci Testo
       </Button>
     </Card>

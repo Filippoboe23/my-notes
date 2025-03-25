@@ -1,0 +1,389 @@
+/* === BASE === */
+body {
+  background: linear-gradient(to bottom, #0e0e0e 0%, #1a1a1a 100%);
+  font-family: "Shippori Mincho B1", serif;
+  color: #f3f3f3;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* === TITLE === */
+h2 {
+  font-size: 3rem;
+  text-align: center;
+  color: #e63946;
+  letter-spacing: 4px;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 8px #640000;
+  font-family: "RocknRoll One", sans-serif;
+  animation: kanjiIntro 1s ease-in-out;
+  position: relative;
+}
+
+h2::after {
+  content: "鬼ノ筆記";
+  position: absolute;
+  bottom: -28px;
+  right: 10%;
+  font-size: 1.2rem;
+  color: #ffccd5;
+  opacity: 0.7;
+  animation: floatKanji 3s ease-in-out infinite alternate;
+}
+
+/* === CARD === */
+.note-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #742a2a66;
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  padding: 1.2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  animation: noteFadeIn 0.8s ease both;
+  position: relative;
+}
+
+.note-card:hover {
+  transform: perspective(800px) rotateX(4deg) rotateY(-2deg);
+  box-shadow: 0 40px 60px rgba(100, 20, 20, 0.5);
+}
+.note-card .note-content {
+  color: #fce4ec; /* rosa chiaro */
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: "Shippori Mincho B1", serif;
+  text-shadow: 0 0 1px #00000099;
+}
+
+/* Sakura kanji decoration */
+.note-card::before {
+  content: "花";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  font-size: 4rem;
+  color: #ffffff12;
+  font-family: "Shippori Mincho B1", serif;
+  transform: rotate(-10deg);
+}
+
+/* === BUTTONS === */
+button.btn {
+  border-radius: 40px;
+  padding: 0.6rem 1.4rem;
+  font-weight: bold;
+  font-family: "RocknRoll One";
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.btn-success {
+  background: linear-gradient(to right, #ff6b6b, #f3c5bd);
+  color: #1a1a1a;
+  border: none;
+  box-shadow: 0 0 12px rgba(255, 107, 107, 0.4);
+}
+
+.btn-outline-primary {
+  border: 2px solid #ffb4c1;
+  color: #ffb4c1;
+  background: transparent;
+}
+
+.btn-outline-primary:hover {
+  background: #ffb4c1;
+  color: #1a1a1a;
+}
+
+.btn-primary {
+  background: linear-gradient(to right, #9d0208, #e63946);
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 8px #e6394699;
+}
+
+button.btn:hover {
+  transform: scale(1.05);
+}
+
+/* === ANIMAZIONI === */
+@keyframes kanjiIntro {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes floatKanji {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(8px);
+  }
+}
+
+@keyframes noteFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === PETALI IN CADUTA === */
+.petal {
+  position: fixed;
+  top: -10%;
+  color: #ffb6c1;
+  font-size: 1.5rem;
+  animation: fall linear infinite;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+.btn-save-note {
+  background: linear-gradient(to right, #fce4ec, #ffb6c1);
+  color: #1a1a1a;
+  font-weight: bold;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 40px;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(255, 182, 193, 0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-save-note:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(248, 187, 208, 0.7);
+}
+.btn-category {
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 30px;
+  padding: 0.5rem 1.2rem;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+/* Categorie suggerite: rosa tenue, contorno */
+.btn-category.suggested {
+  background: transparent;
+  border: 2px dashed #ffb6c1;
+  color: #ffb6c1;
+}
+
+.btn-category.suggested:hover {
+  background: #ffb6c1;
+  color: #1a1a1a;
+  box-shadow: 0 0 10px #ffb6c1aa;
+}
+
+/* Categorie selezionate: rosso profondo, solido */
+.btn-category.selected {
+  background: linear-gradient(to right, #9d0208, #e63946);
+  color: white;
+  border: none;
+  box-shadow: 0 0 8px #e6394688;
+}
+
+.btn-category.selected:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 14px #e63946cc;
+}
+.katana-slash::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100vh;
+  background: linear-gradient(to bottom, #fff, #ff4d6d);
+  transform: translateX(-50%);
+  animation: slashEffect 0.4s ease;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+@keyframes slashEffect {
+  0% {
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    height: 100vh;
+    opacity: 0;
+  }
+}
+.haiku-popup {
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  animation: fadeInOut 3s ease forwards;
+}
+
+.haiku-box {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #ffb6c1;
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  font-family: "Shippori Mincho B1";
+  color: #ffe3ec;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255, 182, 193, 0.2);
+  font-size: 1.2rem;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  10%,
+  90% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+}
+.sidebar-scroll {
+  position: fixed;
+  top: 20%;
+  left: 0;
+  width: 60px;
+  height: 300px;
+  background: linear-gradient(to bottom, #1f1a23, #2c1f2f);
+  border-right: 2px solid #ffb6c1;
+  border-radius: 0 20px 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-family: "Shippori Mincho B1";
+  font-size: 1.8rem;
+  color: #ffb6c1;
+  text-shadow: 0 0 6px #ffb6c1aa;
+  z-index: 1000;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.5);
+  animation: floatKanji 3s ease-in-out infinite alternate;
+}
+/* === AMBIENTAZIONI === */
+
+body.theme-kyoto {
+  background: linear-gradient(to bottom, #1a0e17, #2b1e2f);
+  color: #fce4ec;
+}
+
+body.theme-nezuko {
+  background: linear-gradient(to bottom, #350013, #8e0038);
+  color: #fff0f5;
+}
+
+body.theme-tokyo {
+  background: linear-gradient(to bottom, #0e0e2e, #1e1e5a);
+  color: #c9f5ff;
+}
+
+body.theme-tokyo .note-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: #69f0ff33;
+  box-shadow: 0 20px 40px rgba(100, 180, 255, 0.2);
+}
+
+body.theme-nezuko .note-card {
+  background: rgba(255, 182, 193, 0.05);
+  border-color: #ffb6c188;
+}
+
+body.theme-kyoto .note-card {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: #a18ba6;
+}
+.theme-kanji {
+  display: block;
+  font-size: 1.2rem;
+  font-family: "Shippori Mincho B1";
+  color: #ffb6c1aa;
+  animation: floatKanji 3s ease-in-out infinite alternate;
+  margin-top: 0.5rem;
+}
+.note-creator-card.note-ink {
+  position: relative;
+  background: rgba(30, 20, 35, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(255, 182, 193, 0.04);
+  backdrop-filter: blur(16px);
+  overflow: hidden;
+  padding: 2rem;
+  animation: inkReveal 1s ease-out;
+}
+
+.note-ink-glow {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 140%;
+  height: 160%;
+  background: radial-gradient(circle at center, rgba(255, 182, 193, 0.06), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.note-creator-card .card-header-kanji {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  z-index: 2;
+  position: relative;
+}
+
+.note-creator-card .note-title {
+  font-family: "Shippori Mincho B1";
+  font-size: 1.4rem;
+  color: #ffcfd6;
+  text-shadow: 0 0 4px #ffdde088;
+  letter-spacing: 1px;
+}
+
+.note-creator-card .kanji-subtitle {
+  font-size: 1.5rem;
+  color: #ffb6c1cc;
+  font-family: "Shippori Mincho B1";
+  animation: floatKanji 3s ease-in-out infinite alternate;
+  text-shadow: 0 0 6px #ffb6c199;
+}
+
+.editor-wrapper {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.015);
+  padding: 1rem;
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.02);
+  position: relative;
+  z-index: 1;
+}
