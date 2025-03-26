@@ -9,7 +9,7 @@ body {
 
 /* === TITLE === */
 h2 {
-  font-size: 3rem;
+  font-size: 2rem;
   text-align: center;
   color: #e63946;
   letter-spacing: 4px;
@@ -54,6 +54,8 @@ h2::after {
   line-height: 1.6;
   font-family: "Shippori Mincho B1", serif;
   text-shadow: 0 0 1px #00000099;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
 /* Sakura kanji decoration */
@@ -386,4 +388,167 @@ body.theme-kyoto .note-card {
   box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.02);
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 100%;
+}
+.note-scroll-container {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding-bottom: 1rem;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  scroll-behavior: smooth;
+}
+
+.note-scroll-inner {
+  display: inline-flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.note-scroll-card {
+  flex: 0 0 auto;
+  width: 300px;
+  animation: fadeInAnime 0.7s ease-in;
+}
+
+@keyframes fadeInAnime {
+  0% {
+    opacity: 0;
+    transform: translateX(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+body.theme-kyoto .note-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(186, 104, 200, 0.5); /* un lilla/viola tenue */
+}
+
+body.theme-nezuko .note-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 99, 132, 0.5); /* un rosso caldo */
+}
+
+body.theme-tokyo .note-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 230, 255, 0.5); /* ciano/neon */
+}
+/* Scrollbar container */
+.note-scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+/* Track */
+.note-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Thumb (scroll handle) */
+.note-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+/* Thumb on hover */
+.note-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+/* Container esterno */
+.text-editor-wrapper {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Area di editing */
+.editor-content {
+  background-color: rgba(255, 255, 255, 0.03);
+  color: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  min-height: 200px;
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .editor-content {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Optional: effetto carta */
+.editor-content {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 2rem;
+  font-family: "Noto Serif JP", serif;
+}
+.text-editor-card {
+  width: 100%;
+  max-width: 100%;
+  background-color: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+.editor-toolbar-wrapper {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.editor-toolbar {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+  .editor-toolbar button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.6rem;
+  }
+}
+body.theme-kyoto .editor-toolbar-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(186, 104, 200, 0.5); /* lilla/viola */
+}
+
+body.theme-nezuko .editor-toolbar-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(255, 99, 132, 0.5); /* rosa sangue */
+}
+
+body.theme-tokyo .editor-toolbar-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(0, 230, 255, 0.5); /* ciano neon */
+}
+/* Scrollbar per la toolbar */
+.editor-toolbar-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.editor-toolbar-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.editor-toolbar-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  transition: background 0.3s ease;
+}
+
+.editor-toolbar-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Firefox */
+.editor-toolbar-wrapper {
+  scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+  scrollbar-width: thin;
 }

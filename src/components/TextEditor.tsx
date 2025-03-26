@@ -34,57 +34,58 @@ const TextEditor = ({ content, onChange, onFocus, onInputActivity }: TextEditorP
   }
 
   return (
-    <Card className="p-3">
-      <ButtonGroup className="mb-2">
-        <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleBold().run()} active={editor.isActive("bold")}>
-          <strong>B</strong>
-        </Button>
-        <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleItalic().run()} active={editor.isActive("italic")}>
-          <em>I</em>
-        </Button>
-        <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleUnderline().run()} active={editor.isActive("underline")}>
-          <u>U</u>
-        </Button>
-        <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleBulletList().run()} active={editor.isActive("bulletList")}>
-          • Lista
-        </Button>
-        <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleOrderedList().run()} active={editor.isActive("orderedList")}>
-          1. Lista
-        </Button>
-        <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleBlockquote().run()} active={editor.isActive("blockquote")}>
-          “ Citazione
-        </Button>
-        <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleCodeBlock().run()} active={editor.isActive("codeBlock")}>
-          ` Codice
-        </Button>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => editor.chain().focus().setHeading({ level: 1 }).run()}
-          active={editor.isActive("heading", { level: 1 })}
-        >
-          H1
-        </Button>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => editor.chain().focus().setHeading({ level: 2 }).run()}
-          active={editor.isActive("heading", { level: 2 })}
-        >
-          H2
-        </Button>
-        <Button
-          variant="outline-primary"
-          size="sm"
-          onClick={() => editor.chain().focus().setHeading({ level: 3 }).run()}
-          active={editor.isActive("heading", { level: 3 })}
-        >
-          H3
-        </Button>
-      </ButtonGroup>
-
+    <Card className="p-3 text-editor-card">
+      <div className="editor-toolbar-wrapper">
+        <ButtonGroup className=" editor-toolbar">
+          <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleBold().run()} active={editor.isActive("bold")}>
+            <strong>B</strong>
+          </Button>
+          <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleItalic().run()} active={editor.isActive("italic")}>
+            <em>I</em>
+          </Button>
+          <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleUnderline().run()} active={editor.isActive("underline")}>
+            <u>U</u>
+          </Button>
+          <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleBulletList().run()} active={editor.isActive("bulletList")}>
+            • Lista
+          </Button>
+          <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleOrderedList().run()} active={editor.isActive("orderedList")}>
+            1. Lista
+          </Button>
+          <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleBlockquote().run()} active={editor.isActive("blockquote")}>
+            “ Citazione
+          </Button>
+          <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleCodeBlock().run()} active={editor.isActive("codeBlock")}>
+            ` Codice
+          </Button>
+          <Button
+            variant="outline-primary"
+            size="sm"
+            onClick={() => editor.chain().focus().setHeading({ level: 1 }).run()}
+            active={editor.isActive("heading", { level: 1 })}
+          >
+            H1
+          </Button>
+          <Button
+            variant="outline-primary"
+            size="sm"
+            onClick={() => editor.chain().focus().setHeading({ level: 2 }).run()}
+            active={editor.isActive("heading", { level: 2 })}
+          >
+            H2
+          </Button>
+          <Button
+            variant="outline-primary"
+            size="sm"
+            onClick={() => editor.chain().focus().setHeading({ level: 3 }).run()}
+            active={editor.isActive("heading", { level: 3 })}
+          >
+            H3
+          </Button>
+        </ButtonGroup>
+      </div>
       {/* Contenuto dell'editor */}
-      <EditorContent editor={editor} onFocus={onFocus} />
+      <EditorContent editor={editor} onFocus={onFocus} className="editor-content" />
 
       {/* Pulsante per pulire il contenuto */}
       <Button variant="outline-secondary" size="sm" className="mt-2" onClick={() => editor.commands.clearContent()}>

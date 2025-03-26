@@ -36,7 +36,7 @@ const Home = () => {
 
     const timeout = setTimeout(() => {
       enablePetals();
-    }, 10000); // 10 secondi di inattività
+    }, 2000); // 2 secondi di inattività
 
     setTypingTimeout(timeout);
   };
@@ -62,7 +62,7 @@ const Home = () => {
       </div>
       <Container className="mt-4">
         <h2 className="text-center text-primary mb-4">
-          Gestione Note
+          Death Note
           <span className="theme-kanji">
             {theme === "kyoto" && "古都"}
             {theme === "nezuko" && "鬼血"}
@@ -82,35 +82,37 @@ const Home = () => {
           </Button>
         </div>
 
-        <Row>
-          {notes.map((note) => (
-            <Col md={6} lg={4} key={note.id} className="mb-4">
-              <Card className={`note-card ${deletingNoteId === note.id ? "note-card-exit" : ""}`}>
-                <Card.Body>
-                  <Card.Text className="note-content" dangerouslySetInnerHTML={{ __html: note.content }} />
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    onClick={() => {
-                      setDeletingNoteId(note.id);
-                      document.body.classList.add("katana-slash");
+        <div className="note-scroll-container">
+          <div className="note-scroll-inner">
+            {notes.map((note) => (
+              <div key={note.id} className="note-scroll-card">
+                <Card className={`note-card ${deletingNoteId === note.id ? "note-card-exit" : ""}`}>
+                  <Card.Body>
+                    <Card.Text className="note-content" dangerouslySetInnerHTML={{ __html: note.content }} />
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={() => {
+                        setDeletingNoteId(note.id);
+                        document.body.classList.add("katana-slash");
 
-                      setTimeout(() => {
-                        deleteNote(note.id);
-                        setDeletingNoteId(null);
-                        document.body.classList.remove("katana-slash");
-                      }, 400);
-                    }}
-                    style={{ display: "flex", alignItems: "center", gap: "6px" }}
-                  >
-                    <GiKatana />
-                    Elimina
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
+                        setTimeout(() => {
+                          deleteNote(note.id);
+                          setDeletingNoteId(null);
+                          document.body.classList.remove("katana-slash");
+                        }, 400);
+                      }}
+                      style={{ display: "flex", alignItems: "center", gap: "6px" }}
+                    >
+                      <GiKatana />
+                      Elimina
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <Card className={`note-creator-card note-ink mt-5`}>
           <Card.Body>
