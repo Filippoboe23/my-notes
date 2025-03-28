@@ -58,10 +58,9 @@ const Home = () => {
 
   return (
     <>
-      <div className="sidebar-scroll">
-        <div className="kanji-scroll">筆記録</div>
-      </div>
-      <Container className="mt-4">
+      <div className={`theme-background-image theme-${theme}`}></div>
+
+      <Container className="my-5">
         <h2 className="text-center text-primary mb-4">
           Death Note
           <span className="theme-kanji">
