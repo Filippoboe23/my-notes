@@ -1,3 +1,32 @@
+# 🖋️ Death Note Zen – Notes App Anime-Inspired
+
+Una web app per prendere appunti ispirata all'estetica di *Death Note*, *Zen giapponese* e *anime vibes*.  
+Combina scrittura poetica, petali danzanti, haiku e tre temi visivi: **Kyoto**, **Nezuko**, **Tokyo**.
+
+![screenshot](./preview.png)
+
+---
+
+## ✨ Features
+
+- 📜 **Editor tipografico** con TipTap
+- 🐉 **3 Temi dinamici**: Kyoto (antico), Nezuko (sangue e sakura), Tokyo (neon e notte)
+- 🧠 **Note salvate dinamicamente**
+- 🖼️ **Immagini di sfondo sfocate** basate sul tema
+- ⚔️ **Eliminazione con effetto katana**
+- 🌸 **Petali interattivi** che si attivano/inattivano con l'attività di scrittura
+- 🎏 **Popup Haiku** dopo il salvataggio di una nota
+- 🧾 **Modal di modifica** con zoom elegante
+
+---
+
+## 🚀 Installazione
+
+```bash
+git clone https://github.com/tuo-username/death-note-zen.git
+cd death-note-zen
+npm install
+npm run dev
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
