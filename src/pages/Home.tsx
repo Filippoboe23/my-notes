@@ -5,19 +5,28 @@ import TextEditor from "../components/TextEditor";
 import "../assets/home.css";
 import { GiKatana, GiScrollUnfurled } from "react-icons/gi";
 import { useEffect } from "react";
+import { Note } from "../types";
 
 const Home = () => {
-  const { notes, addNote, deleteNote } = useNotes();
+  const { notes, addNote, deleteNote, updateNote } = useNotes();
   const [content, setContent] = useState("");
-  const [categories, setCategories] = useState<{ name: string; isSuggested: boolean }[]>([]);
+  const [categories, setCategories] = useState<
+    { name: string; isSuggested: boolean }[]
+  >([]);
   const [deletingNoteId, setDeletingNoteId] = useState<string | null>(null);
-  const [typingTimeout, setTypingTimeout] = useState<ReturnType<typeof setTimeout> | null>(null); // ✅ FIX
+  const [typingTimeout, setTypingTimeout] = useState<ReturnType<
+    typeof setTimeout
+  > | null>(null); // ✅ FIX
   const [showHaiku, setShowHaiku] = useState(false);
   const [theme, setTheme] = useState<"kyoto" | "nezuko" | "tokyo">("kyoto");
-  const [editingNote, setEditingNote] = useState<null | { id: string; content: string }>(null);
+  const [editingNote, setEditingNote] = useState<Note>();
 
   useEffect(() => {
-    document.body.classList.remove("theme-kyoto", "theme-nezuko", "theme-tokyo");
+    document.body.classList.remove(
+      "theme-kyoto",
+      "theme-nezuko",
+      "theme-tokyo"
+    );
     document.body.classList.add(`theme-${theme}`);
   }, [theme]);
   const disablePetals = () => {
@@ -71,13 +80,27 @@ const Home = () => {
         </h2>
 
         <div className="theme-selector text-center mb-4">
-          <Button variant="outline-light" size="sm" className="me-2" onClick={() => setTheme("kyoto")}>
+          <Button
+            variant="outline-light"
+            size="sm"
+            className="me-2"
+            onClick={() => setTheme("kyoto")}
+          >
             🏯 Kyoto
           </Button>
-          <Button variant="outline-light" size="sm" className="me-2" onClick={() => setTheme("nezuko")}>
+          <Button
+            variant="outline-light"
+            size="sm"
+            className="me-2"
+            onClick={() => setTheme("nezuko")}
+          >
             🎎 Nezuko
           </Button>
-          <Button variant="outline-light" size="sm" onClick={() => setTheme("tokyo")}>
+          <Button
+            variant="outline-light"
+            size="sm"
+            onClick={() => setTheme("tokyo")}
+          >
             🌃 Tokyo
           </Button>
         </div>
@@ -87,12 +110,17 @@ const Home = () => {
             {notes.map((note) => (
               <div key={note.id} className="note-scroll-card">
                 <Card
-                  className={`note-card ${deletingNoteId === note.id ? "note-card-exit" : ""}`}
-                  onClick={() => setEditingNote({ id: note.id, content: note.content })}
+                  className={`note-card ${
+                    deletingNoteId === note.id ? "note-card-exit" : ""
+                  }`}
+                  onClick={() => setEditingNote(note)}
                   style={{ cursor: "pointer" }}
                 >
                   <Card.Body>
-                    <Card.Text className="note-content" dangerouslySetInnerHTML={{ __html: note.content }} />
+                    <Card.Text
+                      className="note-content"
+                      dangerouslySetInnerHTML={{ __html: note.content }}
+                    />
                     <Button
                       variant="danger"
                       size="sm"
@@ -107,7 +135,11 @@ const Home = () => {
                           document.body.classList.remove("katana-slash");
                         }, 400);
                       }}
-                      style={{ display: "flex", alignItems: "center", gap: "6px" }}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "6px",
+                      }}
                     >
                       <GiKatana />
                       Elimina
@@ -128,7 +160,12 @@ const Home = () => {
             </div>
 
             <div className="editor-wrapper mt-3">
-              <TextEditor content={content} onChange={setContent} onFocus={disablePetals} onInputActivity={handleInputActivity} />
+              <TextEditor
+                content={content}
+                onChange={setContent}
+                onFocus={disablePetals}
+                onInputActivity={handleInputActivity}
+              />
             </div>
 
             <div className="category-wrapper mt-4 mb-3">
@@ -136,8 +173,14 @@ const Home = () => {
                 {categories.map((cat, index) => (
                   <Col key={index} xs="auto">
                     <Button
-                      className={`btn-category ${cat.isSuggested ? "suggested" : "selected"}`}
-                      style={{ display: "flex", alignItems: "center", gap: "6px" }}
+                      className={`btn-category ${
+                        cat.isSuggested ? "suggested" : "selected"
+                      }`}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "6px",
+                      }}
                     >
                       {cat.name}
                     </Button>
@@ -147,7 +190,12 @@ const Home = () => {
             </div>
 
             <div className="text-end">
-              <Button variant="success" className="btn-save-note" onClick={handleSave} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Button
+                variant="success"
+                className="btn-save-note"
+                onClick={handleSave}
+                style={{ display: "flex", alignItems: "center", gap: "8px" }}
+              >
                 <GiScrollUnfurled />
                 Salva Nota
               </Button>
@@ -158,19 +206,29 @@ const Home = () => {
           <div className="edit-overlay">
             <div className="edit-modal">
               <h5 className="mb-3">📝 Modifica Nota</h5>
-              <TextEditor content={editingNote.content} onChange={(newContent) => setEditingNote({ ...editingNote, content: newContent })} />
+              <TextEditor
+                content={editingNote.content}
+                onChange={(newContent) =>
+                  setEditingNote({ ...editingNote, content: newContent })
+                }
+              />
 
-              <div className="text-end mt-3" style={{ display: "flex", justifyContent: "space-between" }}>
-                <Button variant="secondary" onClick={() => setEditingNote(null)}>
+              <div
+                className="text-end mt-3"
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
+                <Button
+                  variant="secondary"
+                  onClick={() => setEditingNote(undefined)}
+                >
                   Annulla
                 </Button>
                 <Button
                   className="btn-save-note"
                   variant="primary"
                   onClick={() => {
-                    deleteNote(editingNote.id);
-                    addNote(editingNote.content, []); // oppure mantieni categorie se vuoi
-                    setEditingNote(null);
+                    updateNote(editingNote);
+                    setEditingNote(undefined);
                   }}
                 >
                   Salva Modifica
