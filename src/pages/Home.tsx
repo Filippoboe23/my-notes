@@ -14,6 +14,7 @@ const Home = () => {
   const [typingTimeout, setTypingTimeout] = useState<ReturnType<typeof setTimeout> | null>(null); // ✅ FIX
   const [showHaiku, setShowHaiku] = useState(false);
   const [theme, setTheme] = useState<"kyoto" | "nezuko" | "tokyo">("kyoto");
+  const [editingNote, setEditingNote] = useState<null | { id: string; content: string }>(null);
 
   useEffect(() => {
     document.body.classList.remove("theme-kyoto", "theme-nezuko", "theme-tokyo");
@@ -86,7 +87,11 @@ const Home = () => {
           <div className="note-scroll-inner">
             {notes.map((note) => (
               <div key={note.id} className="note-scroll-card">
-                <Card className={`note-card ${deletingNoteId === note.id ? "note-card-exit" : ""}`}>
+                <Card
+                  className={`note-card ${deletingNoteId === note.id ? "note-card-exit" : ""}`}
+                  onClick={() => setEditingNote({ id: note.id, content: note.content })}
+                  style={{ cursor: "pointer" }}
+                >
                   <Card.Body>
                     <Card.Text className="note-content" dangerouslySetInnerHTML={{ __html: note.content }} />
                     <Button
@@ -149,6 +154,31 @@ const Home = () => {
             </div>
           </Card.Body>
         </Card>
+        {editingNote && (
+          <div className="edit-overlay">
+            <div className="edit-modal">
+              <h5 className="mb-3">📝 Modifica Nota</h5>
+              <TextEditor content={editingNote.content} onChange={(newContent) => setEditingNote({ ...editingNote, content: newContent })} />
+
+              <div className="text-end mt-3" style={{ display: "flex", justifyContent: "space-between" }}>
+                <Button variant="secondary" onClick={() => setEditingNote(null)}>
+                  Annulla
+                </Button>
+                <Button
+                  className="btn-save-note"
+                  variant="primary"
+                  onClick={() => {
+                    deleteNote(editingNote.id);
+                    addNote(editingNote.content, []); // oppure mantieni categorie se vuoi
+                    setEditingNote(null);
+                  }}
+                >
+                  Salva Modifica
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </Container>
       {showHaiku && (
         <div className="haiku-popup">

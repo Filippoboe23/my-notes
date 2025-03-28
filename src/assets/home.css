@@ -33,6 +33,7 @@ h2::after {
 
 /* === CARD === */
 .note-card {
+  font-family: "Shippori Mincho B1", serif;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid #742a2a66;
   backdrop-filter: blur(6px);
@@ -52,7 +53,7 @@ h2::after {
   color: #fce4ec; /* rosa chiaro */
   font-size: 1rem;
   line-height: 1.6;
-  font-family: "Shippori Mincho B1", serif;
+  font-family: "Shippori Mincho B1", serif !important;
   text-shadow: 0 0 1px #00000099;
   overflow-x: auto;
   scrollbar-width: none;
@@ -551,4 +552,43 @@ body.theme-tokyo .editor-toolbar-wrapper::-webkit-scrollbar-thumb {
 .editor-toolbar-wrapper {
   scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
   scrollbar-width: thin;
+}
+/* Rimuove il contorno bianco al focus */
+.editor-content .ProseMirror:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* per editor note */
+.edit-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.edit-modal {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  color: white;
+  animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
