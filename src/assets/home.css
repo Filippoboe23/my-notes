@@ -71,7 +71,7 @@ h2::after {
   transform: rotate(-10deg);
 }
 
-/* === BUTTONS === */
+/* === BUTTONS == */
 button.btn {
   border-radius: 40px;
   padding: 0.6rem 1.4rem;
