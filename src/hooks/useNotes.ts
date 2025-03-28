@@ -33,5 +33,15 @@ export function useNotes() {
     saveNotes(updatedNotes);
   };
 
-  return { notes, addNote, deleteNote };
+  const updateNote = (noteUpdated: Note) => {
+    const { id } = noteUpdated;
+    const index = notes.findIndex((note) => note.id === id);
+
+    if (index === -1) return;
+    const newNotes = [...notes];
+    newNotes.splice(index, 1, noteUpdated);
+    saveNotes(newNotes);
+  };
+
+  return { notes, addNote, deleteNote, updateNote };
 }
