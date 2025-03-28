@@ -3,7 +3,7 @@
 Una web app per prendere appunti ispirata all'estetica di *Death Note*, *Zen giapponese* e *anime vibes*.  
 Combina scrittura poetica, petali danzanti, haiku e tre temi visivi: **Kyoto**, **Nezuko**, **Tokyo**.
 
-![screenshot](./preview.png)
+
 
 ---
 
