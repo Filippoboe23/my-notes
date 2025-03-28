@@ -35,8 +35,8 @@ const TextEditor = ({ content, onChange, onFocus, onInputActivity }: TextEditorP
 
   return (
     <Card className="p-3 text-editor-card">
-      <div className="editor-toolbar-wrapper">
-        <ButtonGroup className=" editor-toolbar">
+      <div className="editor-toolbar-wrapper px-5">
+        <ButtonGroup className="ms-5 editor-toolbar">
           <Button variant="outline-primary" size="sm" onClick={() => editor.chain().focus().toggleBold().run()} active={editor.isActive("bold")}>
             <strong>B</strong>
           </Button>
