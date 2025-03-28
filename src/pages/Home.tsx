@@ -37,7 +37,7 @@ const Home = () => {
 
     const timeout = setTimeout(() => {
       enablePetals();
-    }, 2000); // 2 secondi di inattività
+    }, 100); // 0.1 secondi di inattività
 
     setTypingTimeout(timeout);
   };
@@ -96,7 +96,8 @@ const Home = () => {
                     <Button
                       variant="danger"
                       size="sm"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setDeletingNoteId(note.id);
                         document.body.classList.add("katana-slash");
 

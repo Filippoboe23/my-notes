@@ -310,21 +310,24 @@ body.theme-tokyo {
   color: #c9f5ff;
 }
 
-body.theme-tokyo .note-card {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: #69f0ff33;
-  box-shadow: 0 20px 40px rgba(100, 180, 255, 0.2);
+body.theme-kyoto .note-card {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: #a18ba6;
+  box-shadow: 0 16px 40px rgba(185, 143, 200, 0.3);
 }
 
 body.theme-nezuko .note-card {
   background: rgba(255, 182, 193, 0.05);
   border-color: #ffb6c188;
+  box-shadow: 0 16px 42px rgba(255, 102, 153, 0.35);
 }
 
-body.theme-kyoto .note-card {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: #a18ba6;
+body.theme-tokyo .note-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: #69f0ff33;
+  box-shadow: 0 12px 32px rgba(100, 180, 255, 0.18);
 }
+
 .theme-kanji {
   display: block;
   font-size: 1.2rem;
